@@ -5,6 +5,7 @@ import (
 	"github.com/Golang-Practice/ds/graph"
 	"github.com/Golang-Practice/ds/leetcode/arrays"
 	"github.com/Golang-Practice/ds/leetcode/trees"
+	"github.com/Golang-Practice/general-prac/sorting"
 )
 
 // Driver file.
@@ -15,7 +16,9 @@ func main() {
 
 	// testMaxSubArr()
 
-	testLevelOrderTraversal()
+	//testLevelOrderTraversal()
+
+	testQuickSort()
 }
 
 func testAdjMatrix() {
@@ -55,4 +58,12 @@ func testLevelOrderTraversal() {
 	}
 
 	fmt.Println(trees.LevelOrderUsingQueue(root))
+}
+
+func testQuickSort() {
+	inputArr := []int{-2, -10, 9, 18, 61, 32}
+	sorting.QuickSort(&inputArr, 0, 5)
+
+	// arr after inplace sorting.
+	fmt.Println(inputArr)
 }
