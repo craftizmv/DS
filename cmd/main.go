@@ -18,7 +18,9 @@ func main() {
 
 	//testLevelOrderTraversal()
 
-	testQuickSort()
+	//testQuickSort()
+
+	testBubbleSort()
 }
 
 func testAdjMatrix() {
@@ -66,4 +68,18 @@ func testQuickSort() {
 
 	// arr after inplace sorting.
 	fmt.Println(inputArr)
+}
+
+func testBubbleSort() {
+	inputArr := []int{-2, -10, 9, 18, 61, 32}
+	sorting.BubbleSort(&inputArr)
+
+	// arr after inplace sorting.
+	fmt.Println(inputArr)
+
+	inputArr2 := []int{5, 4, 3, 2, 1}
+	sorting.BubbleSort(&inputArr2)
+
+	// arr after inplace sorting.
+	fmt.Println(inputArr2)
 }
