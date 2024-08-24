@@ -1,4 +1,4 @@
-package twopointers
+package two_pointers
 
 import (
 	"fmt"

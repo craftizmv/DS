@@ -1,6 +1,9 @@
 package main
 
-import "github.com/craftizmv/DS/pkg/twopointers"
+import (
+	"fmt"
+	"github.com/craftizmv/DS/pkg/merge-interval"
+)
 
 /*func main() {
 	//tp := t.NewTP()
@@ -24,10 +27,21 @@ import "github.com/craftizmv/DS/pkg/twopointers"
 }*/
 
 // Linked list - code to check working
-func main() {
-	ll := new(twopointers.LinkedList)
-	ll.CreateLinkedList([]int{5, 4, 3, 2, 1, 12, 14})
-	ll.RemoveNodeNthPos(5)
-	ll.DisplayLinkedList()
+//func main() {
+//	ll := new(two_pointers.LinkedList)
+//	ll.CreateLinkedList([]int{5, 4, 3, 2, 1, 12, 14})
+//	ll.RemoveNodeNthPos(5)
+//	ll.DisplayLinkedList()
+//}
 
+// check merge problem
+func main() {
+	interval := [][]int{
+		{1, 3},
+		{2, 4},
+		{4, 5},
+		{6, 10},
+	}
+	result := merge_interval.MergeIntervals(interval)
+	fmt.Printf("Result +%v", result)
 }
