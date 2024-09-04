@@ -1,9 +1,6 @@
 package main
 
-import (
-	"fmt"
-	"github.com/craftizmv/DS/pkg/merge-interval"
-)
+import rate_limiter "github.com/craftizmv/DS/pkg/concurrency/rate-limiter"
 
 /*func main() {
 	//tp := t.NewTP()
@@ -35,13 +32,33 @@ import (
 //}
 
 // check merge problem
+//func main() {
+//	//interval := [][]int{
+//	//	{1, 3},
+//	//	{2, 4},
+//	//	{4, 5},
+//	//	{6, 10},
+//	//}
+//	//result := merge_interval.MergeIntervals(interval)
+//	//fmt.Printf("Result +%v", result)
+//
+//	result, err := arrays.ThreeSumBruteForceTriplet([]int{-1, 0, 1, 2, -1, -4}, 0)
+//	if err != nil {
+//		fmt.Print("Error : ", err)
+//		return
+//	}
+//	fmt.Println("Result", result)
+//
+//}
+
+// main - for rate limiter
 func main() {
-	interval := [][]int{
-		{1, 3},
-		{2, 4},
-		{4, 5},
-		{6, 10},
-	}
-	result := merge_interval.MergeIntervals(interval)
-	fmt.Printf("Result +%v", result)
+	//rate_limiter.TickerBasedRateLimiter()
+	//rate_limiter.BurstyRateLimiter()
+	rate_limiter.UberRateLimiter()
 }
+
+// producer consumer
+//func main() {
+//	random_practice.SimpleProducerConsumer()
+//}
