@@ -1,6 +1,10 @@
 package main
 
-import rate_limiter "github.com/craftizmv/DS/pkg/concurrency/rate-limiter"
+import (
+	"fmt"
+	"github.com/craftizmv/DS/pkg/tree/traversals"
+	"time"
+)
 
 /*func main() {
 	//tp := t.NewTP()
@@ -52,13 +56,115 @@ import rate_limiter "github.com/craftizmv/DS/pkg/concurrency/rate-limiter"
 //}
 
 // main - for rate limiter
-func main() {
-	//rate_limiter.TickerBasedRateLimiter()
-	//rate_limiter.BurstyRateLimiter()
-	rate_limiter.UberRateLimiter()
-}
+//func main() {
+//	//rate_limiter.TickerBasedRateLimiter()
+//	//rate_limiter.BurstyRateLimiter()
+//	rate_limiter.UberRateLimiter()
+//}
 
 // producer consumer
 //func main() {
 //	random_practice.SimpleProducerConsumer()
 //}
+
+//func main() {
+//	//result := basics.ReverseDigits(8749348034803)
+//	//fmt.Println("Result is ", result)
+//
+//	tests.FilterCSV("")
+//}
+
+// worker pool main - unbuffered.
+//func main() {
+//	workerPool := NewWorkerPool(5)
+//	workerPool.Start()
+//
+//	for i := 0; i < 10; i++ {
+//		//fmt.Println("Submitting task with ID : ", i)
+//		workerPool.Submit(func() (interface{}, error) {
+//			return someExpensiveOperation(i), nil
+//		})
+//
+//		//fmt.Println("Finished submitting task with ID : ", i)
+//	}
+//
+//	fmt.Println("Going to listen for the result channel")
+//	for i := 0; i < 10; i++ {
+//		var res = workerPool.GetResult()
+//		fmt.Printf("Result: %v", res)
+//	}
+//}
+
+// buffered worker pool
+//func main() {
+//	workerPool := worker_pool_buffered.NewWorkerPool(5)
+//	workerPool.Start()
+//
+//	// IF WE USE 11 INSTEAD OF 10 TASKS THEN AGAIN IT WILL END UP IN DEADLOCK.
+//	// IF WE USE 10 WITH 5 WORKER AND RESULT CHANNEL AS BUFFERED WITH 5, THEN
+//	// AS OTHER 5 TASK WILL BE PICKED UP HENCE, IT WILL UNBLOCK LINE NUMBER 109
+//	// AND HENCE IT WILL START READING RESULTS.
+//
+//	// IDEALLY - WE NEED TO IMPLEMENT IT IN SUCH A WAY THAT... tasks can be listened/consumed
+//	// in async way. - TODO : write a gist for that.
+//
+//	for i := 0; i < 10; i++ {
+//		//fmt.Println("Submitting task with ID : ", i)
+//		workerPool.Submit(func() (interface{}, error) {
+//			return someExpensiveOperation(i), nil
+//		})
+//
+//		//fmt.Println("Finished submitting task with ID : ", i)
+//	}
+//
+//	fmt.Println("Going to listen for the result channel")
+//	for i := 0; i < 10; i++ {
+//		var res = workerPool.GetResult()
+//		fmt.Printf("Result: %v", res)
+//		fmt.Println("   ")
+//	}
+//}
+
+func someExpensiveOperation(i int) interface{} {
+	time.Sleep(1 * time.Second)
+	return true
+}
+
+// morris traversal
+func main() {
+	root := &traversals.Node{
+		Data: 1,
+	}
+	root.Left = &traversals.Node{
+		Data: 2,
+	}
+	root.Right = &traversals.Node{
+		Data: 6,
+	}
+	root.Right.Left = &traversals.Node{
+		Data: 9,
+	}
+	root.Right.Right = &traversals.Node{
+		Data: 7,
+	}
+
+	root.Left.Left = &traversals.Node{
+		Data: 3,
+	}
+	root.Left.Right = &traversals.Node{
+		Data: 4,
+	}
+	root.Left.Right.Left = &traversals.Node{
+		Data: 8,
+	}
+	root.Left.Right.Right = &traversals.Node{
+		Data: 5,
+	}
+
+	bt := traversals.NewBinaryTree(root)
+	err := bt.MorrisInOrderTraversal(root)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+}
