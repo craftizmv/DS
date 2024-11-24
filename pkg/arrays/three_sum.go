@@ -1,6 +1,9 @@
 package arrays
 
-import "errors"
+import (
+	"errors"
+	"sort"
+)
 
 func ThreeSumBruteForce(input []int, target int) (bool, error) {
 	if len(input) < 3 {
@@ -26,6 +29,8 @@ func ThreeSumBruteForce(input []int, target int) (bool, error) {
 	return false, errors.New("not found")
 }
 
+// ThreeSumBruteForceTriplet - here the only requirement is to return the array of array of the found triplets.
+// Complexity : O(n^3)
 func ThreeSumBruteForceTriplet(input []int, target int) ([][]int, error) {
 	var result [][]int
 	if len(input) < 3 {
@@ -55,4 +60,55 @@ func ThreeSumBruteForceTriplet(input []int, target int) ([][]int, error) {
 	}
 
 	return result, nil
+}
+
+// ThreeSumOptimisedTwoPointer : efficient way to create 3 sum.
+// 1. sort and then move the 2 pointers, maintain the target in hashmap.
+func ThreeSumOptimisedTwoPointer(input []int, target int) bool {
+	// check the input
+	if len(input) < 3 {
+		return false
+	}
+
+	// sort the input array
+	sort.Ints(input)
+
+	// follow 2p approach for looking at the target
+	complementLookupMap := make(map[int]struct{}, len(input)/2)
+	start, end := 0, len(input)-1
+	moveForward := 0
+	for start < end {
+		startVal := input[start]
+		if moveForward == 1 {
+			// check if the target is present in the map or not.
+			if _, ok := complementLookupMap[startVal]; ok {
+				return true
+			}
+		}
+		endVal := input[end]
+		if moveForward == -1 {
+			if _, ok := complementLookupMap[endVal]; ok {
+				return true
+			}
+		}
+
+		complement := target - (startVal + endVal)
+		complementLookupMap[complement] = struct{}{}
+
+		// increment the 2p vars based on the target val
+		if complement > target {
+			start++
+			moveForward = 1
+		} else {
+			end--
+			moveForward = -1
+		}
+	}
+
+	return false
+}
+
+// ThreeSumOptimisedTwoLoops : Could be using 2 loops and one hashmap we search the target.
+func ThreeSumOptimisedTwoLoops(input []int, target int) ([][]int, error) {
+	return nil, nil
 }

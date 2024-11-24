@@ -2,8 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/craftizmv/DS/pkg/tree/traversals"
-	"time"
+	"github.com/craftizmv/DS/pkg/arrays"
 )
 
 /*func main() {
@@ -35,25 +34,53 @@ import (
 //	ll.DisplayLinkedList()
 //}
 
-// check merge problem
-//func main() {
-//	//interval := [][]int{
-//	//	{1, 3},
-//	//	{2, 4},
-//	//	{4, 5},
-//	//	{6, 10},
-//	//}
-//	//result := merge_interval.MergeIntervals(interval)
-//	//fmt.Printf("Result +%v", result)
-//
-//	result, err := arrays.ThreeSumBruteForceTriplet([]int{-1, 0, 1, 2, -1, -4}, 0)
-//	if err != nil {
-//		fmt.Print("Error : ", err)
-//		return
-//	}
-//	fmt.Println("Result", result)
-//
-//}
+// check 3 sum problem and merge array problem
+func main() {
+	//interval := [][]int{
+	//	{1, 3},
+	//	{2, 4},
+	//	{4, 5},
+	//	{6, 10},
+	//}
+	//result := merge_interval.MergeIntervals(interval)
+	//fmt.Printf("Result +%v", result)
+
+	//result, err := arrays.ThreeSumBruteForceTriplet([]int{-1, 0, 1, 2, -1, -4}, 0)
+	//if err != nil {
+	//	fmt.Print("Error : ", err)
+	//	return
+	//}
+	//fmt.Println("Result", result)
+
+	//result, err := arrays.ThreeSumOptimisedTwoPointer([]int{-1, 0, 1, 2, -1, -4}, 0)
+	//if err != nil {
+	//	fmt.Print("Error : ", err)
+	//	return
+	//}
+	//fmt.Println("Result", result)
+	//
+	//result, err = arrays.ThreeSumOptimisedTwoPointer([]int{1, 2, 3}, 6)
+	//if err != nil {
+	//	fmt.Print("Error : ", err)
+	//	return
+	//}
+	//fmt.Println("Result", result)
+
+	result := arrays.ThreeSumOptimisedTwoPointer([]int{1, 2, 3, 4, 5}, 9)
+	//if err != nil {
+	//	fmt.Print("Error : ", err)
+	//	return
+	//}
+	fmt.Println("Result", result)
+
+	//result, err = arrays.ThreeSumOptimisedTwoPointer([]int{2, -1, 0, 1, 2}, 0)
+	//if err != nil {
+	//	fmt.Print("Error : ", err)
+	//	return
+	//}
+	//fmt.Println("Result", result)
+
+}
 
 // main - for rate limiter
 //func main() {
@@ -124,47 +151,47 @@ import (
 //		fmt.Println("   ")
 //	}
 //}
-
-func someExpensiveOperation(i int) interface{} {
-	time.Sleep(1 * time.Second)
-	return true
-}
+//
+//func someExpensiveOperation(i int) interface{} {
+//	time.Sleep(1 * time.Second)
+//	return true
+//}
 
 // morris traversal
-func main() {
-	root := &traversals.Node{
-		Data: 1,
-	}
-	root.Left = &traversals.Node{
-		Data: 2,
-	}
-	root.Right = &traversals.Node{
-		Data: 6,
-	}
-	root.Right.Left = &traversals.Node{
-		Data: 9,
-	}
-	root.Right.Right = &traversals.Node{
-		Data: 7,
-	}
-
-	root.Left.Left = &traversals.Node{
-		Data: 3,
-	}
-	root.Left.Right = &traversals.Node{
-		Data: 4,
-	}
-	root.Left.Right.Left = &traversals.Node{
-		Data: 8,
-	}
-	root.Left.Right.Right = &traversals.Node{
-		Data: 5,
-	}
-
-	bt := traversals.NewBinaryTree(root)
-	err := bt.MorrisInOrderTraversal(root)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-}
+//func main() {
+//	root := &traversals.Node{
+//		Data: 1,
+//	}
+//	root.Left = &traversals.Node{
+//		Data: 2,
+//	}
+//	root.Right = &traversals.Node{
+//		Data: 6,
+//	}
+//	root.Right.Left = &traversals.Node{
+//		Data: 9,
+//	}
+//	root.Right.Right = &traversals.Node{
+//		Data: 7,
+//	}
+//
+//	root.Left.Left = &traversals.Node{
+//		Data: 3,
+//	}
+//	root.Left.Right = &traversals.Node{
+//		Data: 4,
+//	}
+//	root.Left.Right.Left = &traversals.Node{
+//		Data: 8,
+//	}
+//	root.Left.Right.Right = &traversals.Node{
+//		Data: 5,
+//	}
+//
+//	bt := traversals.NewBinaryTree(root)
+//	err := bt.MorrisInOrderTraversal(root)
+//	if err != nil {
+//		fmt.Println(err)
+//		return
+//	}
+//}
