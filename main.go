@@ -1,5 +1,10 @@
 package main
 
+import (
+	"fmt"
+	"github.com/craftizmv/DS/pkg/combinatorics"
+)
+
 /*func main() {
 	//tp := t.NewTP()
 	////input := []int16{1, 2, 3, 4, 5}
@@ -74,6 +79,8 @@ func main() {
 	//	return
 	//}
 	//fmt.Println("Result", result)
+
+	fmt.Println(combinatorics.BracketCombinations(3))
 
 }
 
