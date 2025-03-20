@@ -10,5 +10,4 @@ func main() {
 
 	numWaysClimb := CountWaysToNthStair(6, 0)
 	println(numWaysClimb)
-
 }

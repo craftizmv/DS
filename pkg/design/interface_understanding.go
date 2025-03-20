@@ -28,7 +28,8 @@ func NewUIComposer() *UIComposer {
 }
 
 func (c *UIComposer) Compose(state IUserState) {
-
+	state.GetDMA()
+	state.GetTimeZone()
 }
 
 func init() {
