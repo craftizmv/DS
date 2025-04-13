@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/craftizmv/DS/pkg/combinatorics"
 )
 
@@ -66,12 +67,12 @@ func main() {
 	//}
 	//fmt.Println("Result", result)
 
-	//result := arrays.ThreeSumOptimisedTwoPointer([]int{1, 2, 3, 4, 5}, 9)
+	// result := arrays.ThreeSumOptimisedTwoPointer([]int{1, 2, 3, 4, 5}, 9)
 	//if err != nil {
 	//	fmt.Print("Error : ", err)
 	//	return
 	//}
-	//fmt.Println("Result", result)
+	// fmt.Println("Result", result)
 
 	//result, err = arrays.ThreeSumOptimisedTwoPointer([]int{2, -1, 0, 1, 2}, 0)
 	//if err != nil {

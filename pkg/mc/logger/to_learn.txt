@@ -1,0 +1,8 @@
+
+Need to learn to implement
+1. Singleton pattern in golang
+2. Factory pattern in golang
+3. Observer pattern
+4. Builder pattern.
+
+
