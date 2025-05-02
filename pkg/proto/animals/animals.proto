@@ -1,0 +1,49 @@
+syntax = "proto3";
+package animals;
+
+option go_package = "github.com/craftizmv/DS/pkg/proto/animals";
+
+// Animal represents an animal with properties
+message Animal {
+  string name = 1;
+  string color = 2;
+  int32 height = 3;
+}
+
+// AnimalsClient defines the operations for animal management
+service Animals {
+  // GetAnimals returns all animals
+  rpc GetAnimals(GetAnimalsRequest) returns (GetAnimalsResponse);
+  
+  // DeleteAnimals deletes all animals
+  rpc DeleteAnimals(DeleteAnimalsRequest) returns (DeleteAnimalsResponse);
+  
+  // AddAnimal adds a new animal
+  rpc AddAnimal(AddAnimalRequest) returns (AddAnimalResponse);
+  
+  // GetAnimal gets an animal by name
+  rpc GetAnimal(GetAnimalRequest) returns (GetAnimalResponse);
+}
+
+// Request/Response messages
+message GetAnimalsRequest {}
+message GetAnimalsResponse {
+  repeated Animal animals = 1;
+}
+
+message DeleteAnimalsRequest {}
+message DeleteAnimalsResponse {}
+
+message AddAnimalRequest {
+  Animal animal = 1;
+}
+message AddAnimalResponse {
+  Animal animal = 1;
+}
+
+message GetAnimalRequest {
+  string name = 1;
+}
+message GetAnimalResponse {
+  Animal animal = 1;
+}
