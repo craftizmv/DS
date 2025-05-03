@@ -23,7 +23,7 @@ func CountWaysToNthStair(nStairs int, currentStair int) int {
 	return CountWaysToNthStair(nStairs, currentStair+1) + CountWaysToNthStair(nStairs, currentStair+2)
 }
 
-// CountTheCostToReachNthStair - Ref : https://leetcode.com/problems/climbing-stairs/
+// CountTheCostToReachNthStair - Ref : https://leetcode.com/problems/min-cost-climbing-stairs/
 // There are 3 ways to solve it.
 // 1. Recursion
 // 2. Recursion + Memoization
@@ -37,11 +37,11 @@ func CountTheCostToReachNthStair(cost []int) int {
 	nStairs := len(cost)
 
 	// to reach the destination either we would have come from just prev stair.
-	cost1 := solve(nStairs-1, cost)
+	cost1 := effectiveCostToReachNthStair(nStairs-1, cost)
 
 	//solve(nStairs-2, cost) - will already be calculated if it is stored.
 	// or we should have come from prev-2 stair.
-	cost2 := solve(nStairs-2, cost)
+	cost2 := effectiveCostToReachNthStair(nStairs-2, cost)
 
 	// In this case, we don't need to add the cost[nStairs] as nStair_th pos is the destination
 	// and we can not go from there. Also, there is no cost which is given for this.
@@ -101,19 +101,21 @@ func CountTheCostToReachNthStairWithTabulationSpaceOptim(cost []int) int {
 	return int(finalCost)
 }
 
-// solve - this is just with recursion implementation.
-func solve(nStairs int, cost []int) int {
+// effectiveCostToReachNthStair - this is just with recursion implementation.
+func effectiveCostToReachNthStair(nStairs int, cost []int) int {
 	// base case
 	if nStairs == 0 {
 		return cost[0]
 	}
 
+	// as the person can come from 1 or 0th stair .. thats why .. this is selected as base condition.
 	if nStairs == 1 {
 		return cost[1]
 	}
 
 	// store below results in a dp array.
-	result := math.Min(float64(solve(nStairs-1, cost)), float64(solve(nStairs-2, cost))) + float64(cost[nStairs])
+	// below stores the cost of coming from n-1 stair or n-2 stair and then
+	result := math.Min(float64(effectiveCostToReachNthStair(nStairs-1, cost)), float64(effectiveCostToReachNthStair(nStairs-2, cost))) + float64(cost[nStairs])
 	return int(result)
 }
 
