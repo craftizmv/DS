@@ -2,6 +2,9 @@ package dp_practice
 
 import "math"
 
+// Reference : https://www.youtube.com/watch?v=A3FHNCAkhxE&list=PLDzeHZWIZsTomOPnCiU3J95WufjE36wsb&index=4
+// leetcode : https://leetcode.com/problems/coin-change/description/
+
 // minNumberOfCoinsToPurchase - Problem : ??
 // Given denominations of coin in infinite amount - find
 // the min num of coins for which a target sum can be formed.
