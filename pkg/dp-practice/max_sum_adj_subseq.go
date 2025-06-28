@@ -1,42 +1,94 @@
-// max sum adj sub-seq problem
-// Reference: https://www.youtube.com/watch?v=m9-H6AUBLgY&list=PLDzeHZWIZsTomOPnCiU3J95WufjE36wsb&index=4
+// max sum adj sub-seq
 package dp_practice
 
 import "math"
 
-// TODO : Check tomorrow...
-
-type CHOICE_SELECTION int
-
-const (
-	INCLUDE = iota
-	EXCLUDE
-)
-
+// Reference : https://www.youtube.com/watch?v=m9-H6AUBLgY&list=PLDzeHZWIZsTomOPnCiU3J95WufjE36wsb&index=5
+// Leet : https://www.naukri.com/code360/problems/maximum-sum-of-non-adjacent-elements_843261
+// Intuition : For every element in the array - we can either include it or exclude it
+// - meaning we have 2 choices and based on it ..
+// we either choose i+1(exclude case) or i+2 (include case as we can not choose adj.)
+// We can use recursion to solve this problem, but it will be inefficient for larger inputs.
+// So, we can use memoization to store the results of subproblems and avoid redundant calculations.
+// We can also use dynamic programming to solve this problem iteratively.
+// MaxSumAdjSubSeq calculates the maximum sum of non-adjacent elements in the input slice.
 func MaxSumAdjSubSeq(input []int) int {
-	return solveRec(input, 0, 0)
+	if len(input) == 0 {
+		return 0
+	}
+
+	// starting from 0th index.
+	// ans := solveAdj(input, 0)
+	mem := make([]int, len(input))
+	// Initialize memoization array with -1
+	for i := 0; i < len(mem); i++ {
+		mem[i] = -1
+	}
+	// ansWithMemoization := solveAdjWithMemoization(input, 0, mem)
+
+	ansWithIterative := MaxSumAdjSubSeqIterative(input)
+
+	// return ansWithMemoization
+	// return ans
+	return ansWithIterative
 }
 
-// recursive solution - driver func will call this func.
-func solveRec(input []int, idx, currSum int) int {
-	// base case - if out of the array.
+func solveAdj(input []int, idx int) int {
 	if idx >= len(input) {
-		// idx is out of range return 0
-		return currSum
+		return 0
 	}
 
-	// choice 1 : include the given idx
-	newSumInc := currSum + input[idx]
-	newSumInc += solveRec(input, idx+2, newSumInc)
+	inclCaseEffectiveMax := input[idx] + solveAdj(input, idx+2)
 
-	// choice 2 : exclude this index
-	newSumExc := currSum + 0
-	newSumExc += solveRec(input, idx+1, newSumExc)
+	// we add 0 as we are excluding the number at current pos.
+	exclCaseEffectiveMax := 0 + solveAdj(input, idx+1)
 
-	effectiveMaxSumLevel := int(math.Max(float64(newSumInc), float64(newSumExc)))
-	if effectiveMaxSumLevel > currSum {
-		return effectiveMaxSumLevel
-	} else {
-		return currSum
+	effectiveMax := int(math.Max(float64(inclCaseEffectiveMax), float64(exclCaseEffectiveMax)))
+	return effectiveMax
+}
+
+// solveAdjWithMemoization is a helper function that uses
+// memoization to avoid recalculating results for the same index.
+func solveAdjWithMemoization(input []int, idx int, mem []int) int {
+	if idx >= len(input) {
+		return 0
 	}
+
+	// if we have already calculated the value for this index, return it.
+	if mem[idx] != -1 {
+		return mem[idx]
+	}
+
+	inclCaseEffectiveMax := input[idx] + solveAdjWithMemoization(input, idx+2, mem)
+
+	// we add 0 as we are excluding the number at current pos.
+	exclCaseEffectiveMax := 0 + solveAdjWithMemoization(input, idx+1, mem)
+
+	effectiveMax := int(math.Max(float64(inclCaseEffectiveMax), float64(exclCaseEffectiveMax)))
+	mem[idx] = effectiveMax // store the result in memoization array
+
+	return effectiveMax
+}
+
+func MaxSumAdjSubSeqIterative(input []int) int {
+	if len(input) == 0 {
+		return 0
+	}
+
+	if len(input) == 1 {
+		return input[0]
+	}
+
+	// Initialize dp array to store the maximum sum at each index
+	dp := make([]int, len(input))
+	dp[0] = input[0]
+	dp[1] = int(math.Max(float64(input[0]), float64(input[1])))
+
+	for i := 2; i < len(input); i++ {
+		inclCaseEffectiveMax := input[i] + dp[i-2]
+		exclCaseEffectiveMax := dp[i-1]
+		dp[i] = int(math.Max(float64(inclCaseEffectiveMax), float64(exclCaseEffectiveMax)))
+	}
+
+	return dp[len(input)-1]
 }
