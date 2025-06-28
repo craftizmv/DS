@@ -133,3 +133,6 @@ func minNumberOfCoinsToPurchaseWithTabulation(coins []int, target int) int {
 
 	return dp[target]
 }
+
+// max adj sub seq.
+

@@ -8,6 +8,7 @@ import (
 // NOTE : This is not a impl. of a distributed rate limiter.
 
 func TickerBasedRateLimiter() {
+
 	// buffered channel - which is a non-blocking channel
 	requestQueueChan := make(chan int, 5)
 
@@ -43,7 +44,7 @@ func BurstyRateLimiter() {
 		burstyLimiter <- time.Now()
 	}
 
-	// sending the time data continuously - in periodic manner.
+	// sending the time data continuously - in periodic manner in a bg goroutine.
 	go func() {
 		for t := range time.Tick(time.Second) {
 			burstyLimiter <- t

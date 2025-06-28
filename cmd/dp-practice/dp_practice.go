@@ -15,7 +15,7 @@ func main() {
 	//println(numWaysClimb)
 
 	// Count ways with DP solution
-	cost := []int{1, 100, 1, 1, 1, 100, 1, 1, 100, 1}
+	/*cost := []int{1, 100, 1, 1, 1, 100, 1, 1, 100, 1}
 	minCost := dp_practice.CountTheCostToReachNthStair(cost)
 	fmt.Println("Min Cost to Climb nth stair is", minCost)
 
@@ -26,6 +26,7 @@ func main() {
 	fmt.Println("Min Cost to Climb nth stair with DP Sol with Tabulation : ", minCostWithTabulation)
 
 	minCostWithTabulationSOptim := dp_practice.CountTheCostToReachNthStairWithTabulationSpaceOptim(cost)
-	fmt.Println("Min Cost to Climb nth stair with DP Sol with Space Optim Tabulation : ", minCostWithTabulationSOptim)
+	fmt.Println("Min Cost to Climb nth stair with DP Sol with Space Optim Tabulation : ", minCostWithTabulationSOptim)*/
 
+	fmt.Println(dp_practice.MaxSumAdjSubSeq([]int{-1, 9, -3, 7, -9}))
 }
