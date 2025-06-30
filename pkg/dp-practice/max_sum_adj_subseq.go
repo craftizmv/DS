@@ -92,3 +92,34 @@ func MaxSumAdjSubSeqIterative(input []int) int {
 
 	return dp[len(input)-1]
 }
+
+// MaxSumAdjSubSeqIterativeWithSpaceOptimization calculates the maximum sum of non-adjacent
+// elements in the input slice using an iterative approach with space optimization.
+// This approach reduces the space complexity from O(n) to O(1) by only keeping
+// track of the last two computed values instead of the entire dp array.
+// This is a common technique in dynamic programming problems where only the last two states are needed.
+// It is more space-efficient than the previous iterative approach.
+// This function is particularly useful for large input sizes where memory usage is a concern.
+func MaxSumAdjSubSeqIterativeWithSpaceOptimization(input []int) int {
+	if len(input) == 0 {
+		return 0
+	}
+
+	if len(input) == 1 {
+		return input[0]
+	}
+
+	prev2 := input[0]
+	prev1 := int(math.Max(float64(input[0]), float64(input[1])))
+
+	for i := 2; i < len(input); i++ {
+		inclCaseEffectiveMax := input[i] + prev2
+		exclCaseEffectiveMax := prev1
+		current := int(math.Max(float64(inclCaseEffectiveMax), float64(exclCaseEffectiveMax)))
+
+		prev2 = prev1
+		prev1 = current
+	}
+
+	return prev1
+}
