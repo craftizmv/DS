@@ -1,14 +1,17 @@
 package dp_practice
 
-import "math"
+import (
+	"math"
+)
 
 // CountWaysToNthStair - Recursive impl.
 // f(k) = f(k+1) + f(k+2) where k=[0 .. n]
 // we could have also used f(k) = f(k-1) + f(k-2)
 // Ref : https://leetcode.com/problems/climbing-stairs/
 // Ref : https://www.youtube.com/watch?v=S31W3kohFDk&list=PLDzeHZWIZsTomOPnCiU3J95WufjE36wsb&index=2
+// Approach : Bottom to top recursive solution building.
 
-func CountWaysToNthStair(nStairs int, currentStair int) int {
+func CountWaysToNthStairBottomUp(nStairs int, currentStair int) int {
 	// base case 1
 	// yahan pe 1 return karna hai to go from current stair to the same stair
 	if currentStair == nStairs {
@@ -20,19 +23,43 @@ func CountWaysToNthStair(nStairs int, currentStair int) int {
 		return 0
 	}
 
-	return CountWaysToNthStair(nStairs, currentStair+1) + CountWaysToNthStair(nStairs, currentStair+2)
+	return CountWaysToNthStairBottomUp(nStairs, currentStair+1) + CountWaysToNthStairBottomUp(nStairs, currentStair+2)
 }
 
-// CountTheCostToReachNthStair - Ref : https://leetcode.com/problems/min-cost-climbing-stairs/
+func CountWaysToReachNthStairTopDown(nStair int) int {
+
+	return countWaysTopDown(nStair)
+}
+
+func countWaysTopDown(currentStair int) int {
+	// fmt.Println("Current Stair - 1", currentStair)
+	if currentStair < 0 {
+		return 0
+	}
+
+	// f(0) and f(1) = 1.
+	if currentStair == 0 || currentStair == 1 {
+		return 1
+	}
+
+	return countWaysTopDown(currentStair-1) + countWaysTopDown(currentStair-2)
+}
+
+func CountWaysToReachNthStair(nStair int) int {
+	if nStair == 0 {
+		return 1
+	}
+
+	return CountWaysToNthStairBottomUp(nStair, 0)
+}
+
 // There are 3 ways to solve it.
 // 1. Recursion
 // 2. Recursion + Memoization
 // 3. Tabulation = Bottom Up DP
 // 4. Tabulation + Space Optimisation = Bottom Up DP with space optimisation
-func minCostClimbingStairs(cost []int) int {
-	return CountTheCostToReachNthStair(cost)
-}
 
+// CountTheCostToReachNthStair - Ref : https://leetcode.com/problems/min-cost-climbing-stairs/
 func CountTheCostToReachNthStair(cost []int) int {
 	nStairs := len(cost)
 
@@ -49,6 +76,49 @@ func CountTheCostToReachNthStair(cost []int) int {
 	return int(finalCost)
 }
 
+// Recusrive code to solve the min cost to reach nth stair problem.
+func MinCostReachNthStairRecBU(costs []int) int {
+	if len(costs) == 0 {
+		return 0
+	}
+
+	// presence of single stair.
+	if len(costs) == 1 {
+		return costs[0]
+	}
+
+	result := math.Min(solveZ(0, costs), solveZ(1, costs))
+	return int(result)
+}
+
+func solveZ(cStair int, costs []int) float64 {
+	// this represent the top floor
+	if cStair >= len(costs) {
+		return 0
+	}
+
+	return math.Min(solveZ(cStair+1, costs), solveZ(cStair+2, costs)) + float64(costs[cStair])
+}
+
+// effectiveCostToReachNthStair - this is just with recursion implementation.
+func effectiveCostToReachNthStair(nStairs int, cost []int) int {
+	// base case
+	if nStairs == 0 {
+		return cost[0]
+	}
+
+	// as the person can come from 1 or 0th stair .. thats why .. this is selected as base condition.
+	if nStairs == 1 {
+		return cost[1]
+	}
+
+	// store below results in a dp array.
+	// below stores the cost of coming from n-1 stair or n-2 stair and then
+	result := math.Min(float64(effectiveCostToReachNthStair(nStairs-1, cost)), float64(effectiveCostToReachNthStair(nStairs-2, cost))) + float64(cost[nStairs])
+	return int(result)
+}
+
+// Understand the concept of stairs and floors ...
 func CountTheCostToReachNthStairWithDp(cost []int) int {
 	nStairs := len(cost)
 	dp := make([]int, nStairs)
@@ -99,24 +169,6 @@ func CountTheCostToReachNthStairWithTabulationSpaceOptim(cost []int) int {
 	// and we can not go from there. Also, there is no cost which is given for this.
 	finalCost := math.Min(float64(costPrev1), float64(costPrev2))
 	return int(finalCost)
-}
-
-// effectiveCostToReachNthStair - this is just with recursion implementation.
-func effectiveCostToReachNthStair(nStairs int, cost []int) int {
-	// base case
-	if nStairs == 0 {
-		return cost[0]
-	}
-
-	// as the person can come from 1 or 0th stair .. thats why .. this is selected as base condition.
-	if nStairs == 1 {
-		return cost[1]
-	}
-
-	// store below results in a dp array.
-	// below stores the cost of coming from n-1 stair or n-2 stair and then
-	result := math.Min(float64(effectiveCostToReachNthStair(nStairs-1, cost)), float64(effectiveCostToReachNthStair(nStairs-2, cost))) + float64(cost[nStairs])
-	return int(result)
 }
 
 // solve2 - with dp impl.

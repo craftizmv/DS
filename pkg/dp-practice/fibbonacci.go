@@ -10,6 +10,10 @@ func FibRecursive(n int, memoizedSum []int) int {
 		return n
 	}
 
+	if memoizedSum[n] != -1 {
+		return memoizedSum[n]
+	}
+
 	memoizedSum[n] = FibRecursive(n-1, memoizedSum) + FibRecursive(n-2, memoizedSum)
 
 	return memoizedSum[n]
