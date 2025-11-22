@@ -2,6 +2,7 @@ package dp_practice
 
 // References:
 // https://www.naukri.com/code360/problems/cut-into-segments_1214651?leftPanelTabValue=PROBLEM&count=25&search=cut%20into&sort_entity=reactions_count&sort_order=DESC&customSource=studio_nav
+// Ref Video : https://www.youtube.com/watch?v=MFAAZW2znv8&list=PLDzeHZWIZsTomOPnCiU3J95WufjE36wsb&index=6
 
 func CutIntoSegments(n int, a int, b int, c int) int {
 	// This function is a placeholder for the recursive solution.

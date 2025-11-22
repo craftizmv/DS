@@ -6,6 +6,7 @@
 // Also, there is catch to this problem that the first and last house are also adjacent, so you need to handle that case as well.
 
 // Reference: https://www.youtube.com/watch?v=Fe2GeXEzWM0&list=PLDzeHZWIZsTomOPnCiU3J95WufjE36wsb&index=5
+// Problem Ref : https://www.naukri.com/code360/problems/house-robber-ii_839733
 package dp_practice
 
 // HouseRobbery func calculates the maximum amount of money that can be robbed from a series of houses.

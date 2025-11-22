@@ -3,9 +3,24 @@ package dp_practice
 // FibRecursive - Implement the top-down approach to solve it
 // use memoization
 // TC = O(n)
-// SC = O(n) for array + O(n)  for the recursive stack as we are using the array =~ O(n)
+// SC = for the recursive stack  =~ O(n)
 func FibRecursive(n int, memoizedSum []int) int {
-	// base case
+	// base cases
+
+	if n == 0 || n == 1 {
+		return n
+	}
+
+	return FibRecursive(n-1, memoizedSum) + FibRecursive(n-2, memoizedSum)
+}
+
+// FibRecursive - Implement the top-down approach to solve it
+// use memoization
+// TC = O(n)
+// SC = O(n) for the recursive stack  and O(n) to store the results, Total =~ O(n)
+func FibRecursiveMem(n int, memoizedSum []int) int {
+	// base cases
+
 	if n == 0 || n == 1 {
 		return n
 	}

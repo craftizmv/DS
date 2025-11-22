@@ -1,0 +1,37 @@
+P & C :
+
+-------------------------------------------------------------------------------------------
+FPM  - Jahan saare kaam ek ke baad ek karne hon.
+FPA  - Jahan saare kaam independently karne hon.
+
+
+Linear Permutations:
+nCr = No of ways of selecting r things out of n different things ...
+nPr = No of ways of arranging r things out of n different things ...
+
+
+- Gap method and string method
+
+Grouping :
+ - Used in distribution of different object among different people.
+  - Here distribution to labeled group vs non labeled group matters.
+    - checkout : https://youtu.be/GXHs5Cr73O4?t=2350
+
+
+Permutation of Alike Objects:
+ - No of arrangements of n elements where p things are of one kind and q things are of another kind
+  = n!/(p!*q!)
+ 
+
+Circular Permutations:
+ - ...
+
+Total Number of Combinations:
+ - select atleast 1 among n different things
+ - select atleast 1 amongh n alike things.
+
+
+Beggar Method :
+ - Used for distribution of alike objects among different people.
+
+-------------------------------------------------------------------------------------------
