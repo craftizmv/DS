@@ -70,35 +70,35 @@ func TestKnapsack(t *testing.T) {
 		},
 	}
 
-	// for _, tt := range tests {
-	// 	t.Run(tt.name, func(t *testing.T) {
-	// 		// got := Knapsack(tt.weights, tt.values, tt.capacity)
-	// 		got := Knapsack(tt.weights, tt.values, tt.capacity)
-	// 		if got != tt.want {
-	// 			t.Errorf("Knapsack() = %v, want %v", got, tt.want)
-	// 		}
-	// 	})
-	// }
-
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			dp := make([][]int, len(tt.weights))
-			for i := range dp {
-				dp[i] = make([]int, tt.capacity+1)
-			}
-
-			for i := 0; i < len(tt.weights); i++ {
-				for j := 0; j < tt.capacity+1; j++ {
-					dp[i][j] = -1
-				}
-			}
-
-			got := KnapsackMem(tt.weights, tt.values, tt.capacity, dp)
+			// got := Knapsack(tt.weights, tt.values, tt.capacity)
+			got := Knapsack(tt.weights, tt.values, tt.capacity)
 			if got != tt.want {
 				t.Errorf("Knapsack() = %v, want %v", got, tt.want)
 			}
 		})
 	}
+
+	// for _, tt := range tests {
+	// 	t.Run(tt.name, func(t *testing.T) {
+	// 		dp := make([][]int, len(tt.weights))
+	// 		for i := range dp {
+	// 			dp[i] = make([]int, tt.capacity+1)
+	// 		}
+
+	// 		for i := 0; i < len(tt.weights); i++ {
+	// 			for j := 0; j < tt.capacity+1; j++ {
+	// 				dp[i][j] = -1
+	// 			}
+	// 		}
+
+	// 		got := KnapsackMem(tt.weights, tt.values, tt.capacity, dp)
+	// 		if got != tt.want {
+	// 			t.Errorf("Knapsack() = %v, want %v", got, tt.want)
+	// 		}
+	// 	})
+	// }
 }
 
 // testing knapsack algo with behind index calculation

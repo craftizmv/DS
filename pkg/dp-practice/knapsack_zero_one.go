@@ -188,6 +188,7 @@ func solveTab(w, v []int, tC int) int {
 	// 1. create the dp array for tab and initialize it with the base conditions.
 	// b.c = when cap becomes <=0 or we reach the max given weight array length.
 	n := len(w)
+
 	dp := make([][]int, n+1)
 	for i := range dp {
 		dp[i] = make([]int, tC+1)
