@@ -123,6 +123,7 @@ func (bt *BinaryTree) DFSPostOrderRecursive(currentNode *Node) {
 // ############################ DFS USING STACK ############################
 // #######################################################################
 /*
+ DFSPreOrderStack - shows the approach to do pre-order traversal using a stack.
  - Approach = how to create stack.
  - print root.. push right and then left ...
  - above will act as a seed.
@@ -155,5 +156,81 @@ func (bt *BinaryTree) DFSPreOrderStack(currentNode *Node) {
 			st.Push(top.Left)
 		}
 	}
+}
 
+/*
+ DFSInorderTraversal - Keep on pushing left until the left is
+ null -> then pop and print the top -> check if right exists, if yes, then push it.
+ -> continue the loop which should keep on pushing the left of the subtree
+
+ output : it just prints
+*/
+
+func (bt *BinaryTree) DFSInOrderStack(root *Node) {
+	if root == nil {
+		return
+	}
+
+	st := stack.NewGenericStack()
+	// pushing the root as a seed.
+	st.Push(root)
+
+	// jab tak stack me kuch bhara hai .. tab tak continue
+	for st.Size() > 0 {
+		// peek the top and check if left exists
+		// t, _ := st.Peek()
+		// top := t.(*Node)
+		top := root
+		// if left exits
+		if top.Left != nil {
+			st.Push(top.Left)
+			root = top.Left
+		} else {
+			// 1. Pop and Print
+			t, _ := st.Pop()
+			top := t.(*Node)
+			fmt.Println("Data is : ", top.Data)
+
+			if top.Right != nil {
+				st.Push(top.Right)
+				root = top.Right
+			}
+		}
+	}
+}
+
+func (bt *BinaryTree) DFSPostOrderTwoStack(root *Node) {
+	if root == nil {
+		return
+	}
+
+	st1 := stack.NewGenericStack()
+	// pushing the root as a seed.
+	st1.Push(root)
+
+	st2 := stack.NewGenericStack()
+
+	// jab tak stack me kuch bhara hai .. tab tak continue
+	for st1.Size() > 0 {
+		t, _ := st1.Pop()
+		top := t.(*Node)
+
+		// 1. Push to stack2
+		st2.Push(top)
+
+		// push left and then right of top element to stack
+		if top.Left != nil {
+			st1.Push(top.Left)
+		}
+
+		if top.Right != nil {
+			st1.Push(top.Right)
+		}
+	}
+
+	// pop st2 to print everything in post order
+	for st2.Size() > 0 {
+		t, _ := st2.Pop()
+		fmt.Println("Node is : ", t.(*Node).Data)
+	}
 }
