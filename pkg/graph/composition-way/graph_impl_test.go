@@ -1,8 +1,9 @@
-package graph
+package compositionway
 
 import (
-	"github.com/stretchr/testify/require"
 	"testing"
+
+	"github.com/stretchr/testify/require"
 )
 
 func Test_Graph(t *testing.T) {

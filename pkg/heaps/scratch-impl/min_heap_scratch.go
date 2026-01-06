@@ -12,20 +12,20 @@ func (h *MinHeap) BuildHeap(array []int) {
 
 	for currentIdx := lastNonLeafNodeIdx; currentIdx >= 0; currentIdx-- {
 		endIdx := len(array) - 1
+		// why endIdx is needed ??
 		h.siftDown(currentIdx, endIdx) // siftDown is more efficient than siftUp
 	}
 }
 
 // Time: O(logn) | Space: O(1)
 // continuously swap the current node with its smaller child node until it is in the correct position
-func (h *MinHeap) siftDown(currentIdx int, endIdx int) {
+func (h *MinHeap) siftDown(cIdx int, eIdx int) {
+	leftChildIdx := 2*cIdx + 1
 
-	leftChildIdx := currentIdx*2 + 1
+	for leftChildIdx <= eIdx {
+		rightChildIdx := cIdx*2 + 2
 
-	for leftChildIdx <= endIdx {
-		rightChildIdx := currentIdx*2 + 2
-
-		if rightChildIdx > endIdx {
+		if rightChildIdx > eIdx {
 			rightChildIdx = -1
 		}
 
@@ -36,10 +36,10 @@ func (h *MinHeap) siftDown(currentIdx int, endIdx int) {
 		}
 
 		// check if value of swap node is less than the value at currentIdx
-		if (*h)[idxToSwap] < (*h)[currentIdx] {
-			h.swap(idxToSwap, currentIdx)
-			currentIdx = idxToSwap
-			leftChildIdx = currentIdx*2 + 1
+		if (*h)[idxToSwap] < (*h)[cIdx] {
+			h.swap(idxToSwap, cIdx)
+			cIdx = idxToSwap
+			leftChildIdx = cIdx*2 + 1
 
 		} else {
 			return

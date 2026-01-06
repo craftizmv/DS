@@ -3,6 +3,8 @@ package traversals
 import (
 	"errors"
 	"fmt"
+
+	"github.com/lossdev/stack"
 )
 
 // MorrisInOrderTraversal : step 1 : make linking for inorder predecessors
@@ -78,7 +80,6 @@ func (bt *BinaryTree) DFSPreOrderRecursive(currentNode *Node) {
 	bt.DFSPreOrderRecursive(currentNode.Left)
 
 	// visit right node recursively
-
 	bt.DFSPreOrderRecursive(currentNode.Right)
 }
 
@@ -123,5 +124,36 @@ func (bt *BinaryTree) DFSPostOrderRecursive(currentNode *Node) {
 // #######################################################################
 /*
  - Approach = how to create stack.
+ - print root.. push right and then left ...
+ - above will act as a seed.
+
+ - in a continous while loop ... pop print .. add to result push child ..right then left
+ - find its child and push ... [no need to]
  -
 */
+func (bt *BinaryTree) DFSPreOrderStack(currentNode *Node) {
+	if currentNode == nil {
+		return
+	}
+
+	st := stack.NewGenericStack()
+	st.Push(currentNode)
+
+	for st.Size() > 0 {
+		// pop & print
+		t, _ := st.Pop()
+		top := t.(*Node)
+
+		fmt.Println("Item : ", top.Data)
+
+		// push childrens
+		if top.Right != nil {
+			st.Push(top.Right)
+		}
+
+		if top.Left != nil {
+			st.Push(top.Left)
+		}
+	}
+
+}

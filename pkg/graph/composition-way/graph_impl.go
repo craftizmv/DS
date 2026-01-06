@@ -1,6 +1,11 @@
-package graph
+package compositionway
+
+// Reference : https://medium.com/@snassr/graphs-with-go-golang-part-i-3e0f9392c294
+// TODO - Read about functional option : https://dave.cheney.net/2014/10/17/functional-options-for-friendly-apis
 
 // NewGraph returns a new graph.
+// This implementation uses a compositional way to implement the Graph
+// and it shows how different components and their relationship with each other.
 func NewGraph(opts ...GraphOption) *Graph {
 	g := &Graph{Vertices: map[int]*Vertex{}}
 
@@ -9,6 +14,25 @@ func NewGraph(opts ...GraphOption) *Graph {
 	}
 
 	return g
+}
+
+// Graph represents a set of vertices connected by edges.
+type Graph struct {
+	Vertices map[int]*Vertex
+}
+
+// Vertex is a node in the graph that stores the int value at that node
+// along with a map to the vertices it is connected to via edges.
+// in this way of representing graphs - it is basically composing Edges.
+type Vertex struct {
+	Val   int
+	Edges map[int]*Edge
+}
+
+// Edge represents an edge in the graph and the destination vertex.
+type Edge struct {
+	Weight int
+	Vertex *Vertex // This is the destination vertex.
 }
 
 // GraphOption is a functional option for the graph constructor.
@@ -30,29 +54,11 @@ func WithAdjacencyList(list map[int][]int) GraphOption {
 					this.AddVertex(edge, edge)
 				}
 
+				// we can give unit weights also as default as per striver.
 				this.AddEdge(vertex, edge, 0) // no weights in this adjacency list
 			}
 		}
 	}
-}
-
-// Graph represents a set of vertices connected by edges.
-type Graph struct {
-	Vertices map[int]*Vertex
-}
-
-// Vertex is a node in the graph that stores the int value at that node
-// along with a map to the vertices it is connected to via edges.
-// in this way of representing graphs - it is basically composing Edges.
-type Vertex struct {
-	Val   int
-	Edges map[int]*Edge
-}
-
-// Edge represents an edge in the graph and the destination vertex.
-type Edge struct {
-	Weight int
-	Vertex *Vertex // This is the destination vertex.
 }
 
 // AddVertex adds a vertex to the graph with no edges.

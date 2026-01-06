@@ -46,6 +46,7 @@ func main() {
 
 	//bt.DFSInOrderRecursive(root)
 
-	bt.DFSPostOrderRecursive(root)
+	// bt.DFSPostOrderRecursive(root)
+	bt.DFSPreOrderStack(root)
 
 }
