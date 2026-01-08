@@ -234,3 +234,48 @@ func (bt *BinaryTree) DFSPostOrderTwoStack(root *Node) {
 		fmt.Println("Node is : ", t.(*Node).Data)
 	}
 }
+
+// Reference : https://youtu.be/kcTcfOWFizA?si=BKQLyUvQpKGJFavq
+func (bt *BinaryTree) DFSPostOrderOneStack(root *Node) {
+	// seed position
+	st := stack.NewGenericStack()
+	curr := root
+
+	// while true loop
+	for {
+		if curr != nil {
+			st.Push(curr)
+			curr = curr.Left
+		} else {
+			if st.Size() == 0 {
+				// stack is empty - no need to further process it.
+				break
+			}
+
+			// below means that we need to check the right subtree of the top of the stack as either the left
+			// subtree has been processed or it was found to be nil and now the pointer need to be on the right
+			// of the top of the stack.
+			t, _ := st.Peek()
+			curr = t.(*Node).Right
+			if curr == nil {
+				// right is nil .. now it means that we need to pop and print what is on top of the stack.
+				// maintain a last variable to track if the prev processed element is stack top right ..if yes
+				// it means that right subtree has been processed and we can process the left subtree
+				var last *Node
+				for st.Size() > 0 {
+					tempTop, _ := st.Peek()
+					if tempTop.(*Node).Right == last {
+						// 1. Pop -> Print -> set last to popped element
+						top, _ := st.Pop()
+						last = top.(*Node)
+						fmt.Print("Node Data is :", last.Data, "  \n")
+					} else {
+						break
+					}
+				}
+			}
+		}
+
+	}
+
+}

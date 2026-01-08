@@ -52,6 +52,8 @@ func main() {
 
 	// bt.DFSInOrderStack(root)
 
-	bt.DFSPostOrderTwoStack(root)
+	// bt.DFSPostOrderTwoStack(root)
+
+	bt.DFSPostOrderOneStack(root)
 
 }
