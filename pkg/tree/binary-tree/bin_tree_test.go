@@ -1,4 +1,4 @@
-package traversals
+package binary_tree
 
 import (
 	"bytes"
@@ -58,13 +58,13 @@ func parseOutputToInts(out string) []int64 {
 // buildBalancedTree builds the sample balanced tree used in cmd/dsa-trees/main.go
 // and returns its root. The structure is:
 //
-//           1
-//        /     \
-//       2       6
-//      / \     / \
-//     3   4   9   7
-//        / \
-//       8   5
+//	      1
+//	   /     \
+//	  2       6
+//	 / \     / \
+//	3   4   9   7
+//	   / \
+//	  8   5
 func buildBalancedTree() *Node {
 	root := &Node{Data: 1}
 

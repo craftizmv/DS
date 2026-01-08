@@ -1,4 +1,4 @@
-package traversals
+package binary_tree
 
 import (
 	"errors"
@@ -6,6 +6,23 @@ import (
 
 	"github.com/lossdev/stack"
 )
+
+// Node : TODO - make it generic with golang
+type Node struct {
+	Data  int64
+	Left  *Node
+	Right *Node
+}
+
+type BinaryTree struct {
+	root *Node
+}
+
+func NewBinaryTree(root *Node) *BinaryTree {
+	return &BinaryTree{
+		root: root,
+	}
+}
 
 // MorrisInOrderTraversal : step 1 : make linking for inorder predecessors
 // step 2 : we will print when we reach a node where it does have any Left or Right node.
@@ -57,7 +74,7 @@ func (bt *BinaryTree) BFS() {
 }
 
 // #######################################################################
-// ############################ DFS RECURSIVE ############################
+// ######################### Traversals Recursive ########################
 // #######################################################################
 
 // DFSPreOrderRecursive (DLR) - This can be implemented using stack or using recursion
@@ -120,7 +137,7 @@ func (bt *BinaryTree) DFSPostOrderRecursive(currentNode *Node) {
 }
 
 // #######################################################################
-// ############################ DFS USING STACK ############################
+// ##################### Traversals using stack ##########################
 // #######################################################################
 /*
  DFSPreOrderStack - shows the approach to do pre-order traversal using a stack.
@@ -278,4 +295,18 @@ func (bt *BinaryTree) DFSPostOrderOneStack(root *Node) {
 
 	}
 
+}
+
+// #######################################################################
+// ##################### utility functions ###############################
+// #######################################################################
+
+// TC : O(N) - You would have to visit all the nodes and its branches to determine
+// the complexity.
+func (bt *BinaryTree) MaxDepth(root *Node) int {
+	if root == nil {
+		return 0
+	}
+
+	return 1 + max(bt.MaxDepth(root.Left), bt.MaxDepth(root.Right))
 }

@@ -1,41 +1,43 @@
 package main
 
 import (
-	"github.com/craftizmv/DS/pkg/tree/traversals"
+	"fmt"
+
+	binary_tree "github.com/craftizmv/DS/pkg/tree/binary-tree"
 )
 
 // morris traversal
 func main() {
-	root := &traversals.Node{
+	root := &binary_tree.Node{
 		Data: 1,
 	}
-	root.Left = &traversals.Node{
+	root.Left = &binary_tree.Node{
 		Data: 2,
 	}
-	root.Right = &traversals.Node{
+	root.Right = &binary_tree.Node{
 		Data: 6,
 	}
-	root.Right.Left = &traversals.Node{
+	root.Right.Left = &binary_tree.Node{
 		Data: 9,
 	}
-	root.Right.Right = &traversals.Node{
+	root.Right.Right = &binary_tree.Node{
 		Data: 7,
 	}
 
-	root.Left.Left = &traversals.Node{
+	root.Left.Left = &binary_tree.Node{
 		Data: 3,
 	}
-	root.Left.Right = &traversals.Node{
+	root.Left.Right = &binary_tree.Node{
 		Data: 4,
 	}
-	root.Left.Right.Left = &traversals.Node{
+	root.Left.Right.Left = &binary_tree.Node{
 		Data: 8,
 	}
-	root.Left.Right.Right = &traversals.Node{
+	root.Left.Right.Right = &binary_tree.Node{
 		Data: 5,
 	}
 
-	bt := traversals.NewBinaryTree(root)
+	bt := binary_tree.NewBinaryTree(root)
 	//err := bt.MorrisInOrderTraversal(root)
 	//if err != nil {
 	//	fmt.Println(err)
@@ -54,6 +56,8 @@ func main() {
 
 	// bt.DFSPostOrderTwoStack(root)
 
-	bt.DFSPostOrderOneStack(root)
+	// bt.DFSPostOrderOneStack(root)
+
+	fmt.Println("Depth is ", bt.MaxDepth(root))
 
 }
