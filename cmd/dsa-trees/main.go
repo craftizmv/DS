@@ -4,40 +4,41 @@ import (
 	"fmt"
 
 	binary_tree "github.com/craftizmv/DS/pkg/tree/binary-tree"
+	"github.com/craftizmv/DS/pkg/tree/problems/medium"
 )
 
 // morris traversal
 func main() {
-	// root := &binary_tree.Node{
-	// 	Data: 1,
-	// }
-	// root.Left = &binary_tree.Node{
-	// 	Data: 2,
-	// }
-	// root.Right = &binary_tree.Node{
-	// 	Data: 6,
-	// }
-	// root.Right.Left = &binary_tree.Node{
-	// 	Data: 9,
-	// }
-	// root.Right.Right = &binary_tree.Node{
-	// 	Data: 7,
-	// }
+	root := &medium.Node{
+		Data: 1,
+	}
+	root.Left = &medium.Node{
+		Data: 2,
+	}
+	root.Right = &medium.Node{
+		Data: 6,
+	}
+	root.Right.Left = &medium.Node{
+		Data: 9,
+	}
+	root.Right.Right = &medium.Node{
+		Data: 7,
+	}
 
-	// root.Left.Left = &binary_tree.Node{
-	// 	Data: 3,
-	// }
-	// root.Left.Right = &binary_tree.Node{
-	// 	Data: 4,
-	// }
-	// root.Left.Right.Left = &binary_tree.Node{
-	// 	Data: 8,
-	// }
-	// root.Left.Right.Right = &binary_tree.Node{
-	// 	Data: 5,
-	// }
+	root.Left.Left = &medium.Node{
+		Data: 3,
+	}
+	root.Left.Right = &medium.Node{
+		Data: 4,
+	}
+	root.Left.Right.Left = &medium.Node{
+		Data: 8,
+	}
+	root.Left.Right.Right = &medium.Node{
+		Data: 5,
+	}
 
-	// bt := binary_tree.NewBinaryTree(root)
+	// bt := medium.NewBinaryTree(root)
 	//err := bt.MorrisInOrderTraversal(root)
 	//if err != nil {
 	//	fmt.Println(err)
@@ -60,8 +61,19 @@ func main() {
 
 	// fmt.Println("Depth is ", bt.MaxDepth(root))
 
-	skewTree, root := sampleSkewTree()
-	fmt.Println("Is Balanced ", skewTree.IsBalancedTree(root))
+	// skewTree, root := sampleSkewTree()
+	// fmt.Println("Is Balanced ", skewTree.IsBalancedTree(root))
+
+	// fmt.Println("Diameter is : ", bt.Diameter(root))
+
+	// diam := 0
+	// fmt.Println("Diameter 2 is : ", bt.Diameter2(root, &diam))
+
+	// maxi := 0
+	// bt.MaxPathValueSum(root, &maxi)
+	// fmt.Println("Max Path Value Sum : ", maxi)
+
+	fmt.Println("IsIdentical : ", medium.IsIdentical(root, root.Right))
 
 }
 
